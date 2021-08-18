@@ -1,12 +1,33 @@
 ## Introduction
 
-We run **nf-core/rnaseq** pipeline that to analyse RNA sequencing data obtained from organisms with a reference genome and annotation.
-
-On release, automated continuous integration tests run the pipeline on a [full-sized dataset](https://github.com/nf-core/test-datasets/tree/rnaseq#full-test-dataset-origin) obtained from the ENCODE Project Consortium on the AWS cloud infrastructure. This ensures that the pipeline runs on AWS, has sensible resource allocation defaults set to run on real-world datasets, and permits the persistent storage of results to benchmark between pipeline releases and other analysis sources. The results obtained from running the full-sized tests individually for each `--aligner` option can be viewed on the [nf-core website](https://nf-co.re/rnaseq/results) e.g. the results for running the pipeline with `--aligner star_salmon` will be in a folder called `aligner_star_salmon` and so on.
+**nf-core/rnaseq** pipeline is used to analyse RNA sequencing data obtained from organisms with a reference genome and annotation.
 
 The pipeline is built using [Nextflow](https://www.nextflow.io), a workflow tool to run tasks across multiple compute infrastructures in a very portable manner. It uses Docker/Singularity containers making installation trivial and results highly reproducible. The [Nextflow DSL2](https://www.nextflow.io/docs/latest/dsl2.html) implementation of this pipeline uses one container per process which makes it much easier to maintain and update software dependencies. Where possible, these processes have been submitted to and installed from [nf-core/modules](https://github.com/nf-core/modules) in order to make them available to all nf-core pipelines, and to everyone within the Nextflow community!
 
-New customized genomes:
+## The nextflow tower public hosted server is used to run this pipeline.
+
+To run the pipeline, go to tower.nf.
+
+## Files prepared to run the pipeline.
+
+1. Transfer all the fastq.gz files to aws s3 use aws s3 cp command line.
+2. generate sample sheet as describe in the [nf-core rnaseq usage document](https://nf-co.re/rnaseq/3.3/usage). In the samplesheet, you provde the sample name, the path to fastq file(s), and the strandness information. transfer this file to aws s3 bucket.
+3. Now you are all set to run the pipeline at nf-tower: tower.nf
+4. In the nf-tower, you will need to inut the following. Most other parameters have defaults, but you can change.
+
+- inut: the path to sample sheet
+- outdir: the results directory.  **don't forget the last slash /**
+- genome.
+
+```
+{
+    "input":"s3://dicerna-etl/test/monkey/sample_sheet_full.csv",
+    "outdir":"s3://dicerna-etl/test/monkey_dicerna/results_star/",  
+    "genome":"mf5_ens_v102",
+    "aligner":"hisat2"
+}
+```
+Those customized genomes were hosted in aws s3 for dicerna use. We can upgrade as we want. The GRCm38_v102, mf6_ens_v104, ... can be used in the genome field.
 
 ```
      'GRCm38_v102' {
@@ -26,8 +47,7 @@ New customized genomes:
         gtf  = 's3://dicerna-etl/genomes/Macaca_fascicularis_5.0_refseq_release_101/GCF_000364345.1_Macaca_fascicularis_5.0_genomic.fixed.gtf.gz'
       }
 ```
-
-The **mf5_ens_v102_ga01** was added to reproduced the config ran at GA01. 
+ 
 
 ## Pipeline summary
 
