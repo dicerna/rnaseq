@@ -29,19 +29,23 @@ To run the pipeline, go to tower.nf.
 ```
 Those customized genomes were hosted in aws s3 for dicerna use. We can upgrade as we want. The GRCm38_v102, mf6_ens_v104, ... can be used in the genome field.
 
-```
-     'GRCm38_v102' {
+ ```
+      // mouse GRCm38, ensembl v102
+      'GRCm38_v102' {
         fasta = 's3://dicerna-sysbio/genomes/GRCm38/Mus_musculus.GRCm38.dna.primary_assembly.fa.gz'
         gtf  = 's3://dicerna-sysbio/genomes/GRCm38/Mus_musculus.GRCm38.102.gtf'
       }
+      // monkey, mf6, ensembl v104
       'mf6_ens_v104' {
         fasta = 's3://dicerna-etl/genomes/Macaca_fascicularis_6.0/Macaca_fascicularis.Macaca_fascicularis_6.0.dna.toplevel.fa.gz'
         gtf = 's3://dicerna-etl/genomes/Macaca_fascicularis_6.0/Macaca_fascicularis.Macaca_fascicularis_6.0.104.gtf.gz'
       }
+      // monkey, mf5, ensemb, v102
       'mf5_ens_v102' {
         fasta = 's3://dicerna-etl/genomes/Macaca_fascicularis_5.0_ensembl_release_102/Macaca_fascicularis.Macaca_fascicularis_5.0.dna.toplevel.fa.gz'
-        gtf = 's3://dicerna-etl/genomes/Macaca_fascicularis_5.0_ensembl_release_102/data/genomics/Jun/references/Macaca_fascicularis.Macaca_fascicularis_5.0.102.gtf.gz'
+        gtf = 's3://dicerna-etl/genomes/Macaca_fascicularis_5.0_ensembl_release_102/Macaca_fascicularis.Macaca_fascicularis_5.0.102.gtf.gz'
       }
+      // monkey, mf5, refseq release 101
       'mf5_refseq_r101' {
         fasta = 's3://dicerna-etl/genomes/Macaca_fascicularis_5.0_refseq_release_101/GCF_000364345.1_Macaca_fascicularis_5.0_genomic.fna.gz'
         gtf  = 's3://dicerna-etl/genomes/Macaca_fascicularis_5.0_refseq_release_101/GCF_000364345.1_Macaca_fascicularis_5.0_genomic.fixed.gtf.gz'
