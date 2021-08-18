@@ -48,7 +48,16 @@ Those customized genomes were hosted in aws s3 for dicerna use. We can upgrade a
       }
 ```
  
-
+Again, this is the check list for the important things to check:
+```
+Input/output options
+  input          : s3://dicerna-etl/test/monkey/sample_sheet_full.csv
+  outdir         : s3://dicerna-etl/test/monkey_dicerna/results_star/
+Reference genome options
+  genome         : mf5_ens_v102
+  aligner        : "star_salmon"  or "hisat2"
+```
+  
 ## Pipeline summary
 
 The SRA download functionality has been removed from the pipeline (`>=3.2`) and ported to an independent workflow called [nf-core/fetchngs](https://nf-co.re/fetchngs). You can provide `--nf_core_pipeline rnaseq` when running nf-core/fetchngs to download and auto-create a samplesheet containing publicly available samples that can be accepted directly as input by this pipeline.
