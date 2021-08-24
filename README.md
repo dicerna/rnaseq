@@ -30,6 +30,14 @@ To run the pipeline, go to tower.nf.
 Those customized genomes were hosted in aws s3 for dicerna use. We can upgrade as we want. The GRCm38_v102, mf6_ens_v104, ... can be used in the genome field.
 
  ```
+      'human_ensembl_v014_2021_March' {
+        fasta = 's3://dicerna-sysbio/genomes/human_ensembl_v014_2021_March/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz'
+        gtf  = 's3://dicerna-sysbio/genomes/human_ensembl_v014_2021_March/Homo_sapiens.GRCh38.104.gtf.gz'
+      }
+      'human_refseq_v103_2020_Aug' {
+        fasta = 's3://dicerna-sysbio/genomes/human_refseq_v103_2020_Aug/GCF_000001405.39_GRCh38.p13_genomic.fna.gz'
+        gtf  = 's3://dicerna-sysbio/genomes/human_refseq_v103_2020_Aug/Homo_sapiens.GRCh38.103.chr.gtf.gz'
+      }
       // mouse GRCm38, ensembl v102
       'GRCm38_v102' {
         fasta = 's3://dicerna-sysbio/genomes/GRCm38/Mus_musculus.GRCm38.dna.primary_assembly.fa.gz'
