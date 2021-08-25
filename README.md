@@ -34,9 +34,9 @@ Those customized genomes were hosted in aws s3 for dicerna use. We can upgrade a
         fasta = 's3://dicerna-sysbio/genomes/human_ensembl_v014_2021_March/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz'
         gtf  = 's3://dicerna-sysbio/genomes/human_ensembl_v014_2021_March/Homo_sapiens.GRCh38.104.gtf.gz'
       }
-      'human_refseq_v103_2020_Aug' {
-        fasta = 's3://dicerna-sysbio/genomes/human_refseq_v103_2020_Aug/GCF_000001405.39_GRCh38.p13_genomic.fna.gz'
-        gtf  = 's3://dicerna-sysbio/genomes/human_refseq_v103_2020_Aug/Homo_sapiens.GRCh38.103.chr.gtf.gz'
+     'human_refseq_release_109_2021_May' {
+        fasta = 's3://dicerna-sysbio/genomes/human_refseq_release_109_2021_May/GCF_000001405.39_GRCh38.p13_genomic.fna.gz'
+        gtf  = 's3://dicerna-sysbio/genomes/human_refseq_release_109_2021_May/GCF_000001405.39_GRCh38.p13_genomic.gtf.gz'
       }
       // mouse GRCm38, ensembl v102
       'GRCm38_v102' {
