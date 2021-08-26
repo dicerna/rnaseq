@@ -19,6 +19,18 @@ To run the pipeline, go to tower.nf.
 - outdir: the results directory.  **don't forget the last slash /**
 - genome.
 
+**Genomes names you can use**
+
+- **humuan:** ensembl: 'human_ensembl_v104_2021_March', refseq: 'human_refseq_release_109_2021_May', or GRCh38', 'GRCh37' from iGenome
+
+- **mouse:** ensembl: 'GRCm38_v102'
+
+- **crab eating monkey mf6:** ensembl: 'mf6_ens_v104'
+
+- **crab eating monkey mf5: ensembl:** 'mf5_ens_v102', refseq: 'mf5_refseq_r101'
+
+The mouse GRCm39 ensembl has not been tested, use with your own risk.
+
 ```
 {
     "input":"s3://dicerna-etl/test/monkey/sample_sheet_full.csv",
