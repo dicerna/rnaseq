@@ -29,7 +29,7 @@ To run the pipeline, go to tower.nf.
 
 - **crab eating monkey mf5: ensembl:** 'mf5_ens_v102', refseq: 'mf5_refseq_r101'
 
-The mouse GRCm39 ensembl has not been tested, use with your own risk.
+**The mouse GRCm39 ensembl v104: GRCm39_v104 was also added, but has not been tested. Use with your own risk.**
 
 ```
 {
@@ -43,30 +43,33 @@ Those customized genomes were hosted in aws s3 for dicerna use. We can upgrade a
 Currently, there is no working human Refseq reference. The stringtie fails because of the GTF format issues.
 
  ```
-      'human_ensembl_v104_2021_March' {
-        fasta = 's3://dicerna-sysbio/genomes/human_ensembl_v014_2021_March/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz'
-        gtf  = 's3://dicerna-sysbio/genomes/human_ensembl_v014_2021_March/Homo_sapiens.GRCh38.104.gtf.gz'
+        'human_refseq_release_109_2021_May' {
+        fasta = 's3://dicerna-sysbio/genomes/refseq_GRCh38_major_release_seqs_for_alignment_pipelines/GCA_000001405.15_GRCh38_full_analysis_set.fna.gz'
+        gff  = 's3://dicerna-sysbio/genomes/refseq_GRCh38_major_release_seqs_for_alignment_pipelines/GCA_000001405.15_GRCh38_full_analysis_set.refseq_annotation.gff.gz'
+        hisat2_index = 's3://dicerna-sysbio/genomes/refseq_GRCh38_major_release_seqs_for_alignment_pipelines/GCA_000001405.15_GRCh38_full_analysis_set.fna.hisat2_index.tar.gz'
       }
-     'human_refseq_release_109_2021_May' {
-        fasta = 's3://dicerna-sysbio/genomes/human_refseq_release_109_2021_May/GCF_000001405.39_GRCh38.p13_genomic.fna.gz'
-        gtf  = 's3://dicerna-sysbio/genomes/human_refseq_release_109_2021_May/GCF_000001405.39_GRCh38.p13_genomic.gtf.gz'
-      }
-      // mouse GRCm38, ensembl v102
       'GRCm38_v102' {
         fasta = 's3://dicerna-sysbio/genomes/GRCm38/Mus_musculus.GRCm38.dna.primary_assembly.fa.gz'
         gtf  = 's3://dicerna-sysbio/genomes/GRCm38/Mus_musculus.GRCm38.102.gtf'
       }
-      // monkey, mf6, ensembl v104
+      'GRCm39_v104' {
+        fasta = 's3://dicerna-sysbio/genomes/GRCm39_v104/Mus_musculus.GRCm39.dna.primary_assembly.fa.gz'
+        gtf  = 's3://dicerna-sysbio/genomes/GRCm39_v104/Mus_musculus.GRCm39.104.gtf.gz'
+      }
       'mf6_ens_v104' {
         fasta = 's3://dicerna-etl/genomes/Macaca_fascicularis_6.0/Macaca_fascicularis.Macaca_fascicularis_6.0.dna.toplevel.fa.gz'
         gtf = 's3://dicerna-etl/genomes/Macaca_fascicularis_6.0/Macaca_fascicularis.Macaca_fascicularis_6.0.104.gtf.gz'
       }
-      // monkey, mf5, ensemb, v102
       'mf5_ens_v102' {
         fasta = 's3://dicerna-etl/genomes/Macaca_fascicularis_5.0_ensembl_release_102/Macaca_fascicularis.Macaca_fascicularis_5.0.dna.toplevel.fa.gz'
         gtf = 's3://dicerna-etl/genomes/Macaca_fascicularis_5.0_ensembl_release_102/Macaca_fascicularis.Macaca_fascicularis_5.0.102.gtf.gz'
       }
-      // monkey, mf5, refseq release 101
+      'mf5_ens_v102_ga01' {
+        fasta = 's3://dicerna-etl/genomes/Macaca_fascicularis_5.0_ensembl_release_102/Macaca_fascicularis.Macaca_fascicularis_5.0.dna.toplevel.fa.gz'
+        hisat2_index = 's3://dicerna-etl/genomes/Macaca_fascicularis_5.0_ensembl_release_102/feiran_hisat2_index/'
+        splicesites = 's3://dicerna-etl/genomes/mf5_ensembl_ga01/Macaca_fascicularis.ensembl.5.0.96_splicesites.txt'
+        gtf = 's3://dicerna-etl/genomes/Macaca_fascicularis_5.0_ensembl_release_102/Macaca_fascicularis.Macaca_fascicularis_5.0.102.gtf.gz'
+      }
       'mf5_refseq_r101' {
         fasta = 's3://dicerna-etl/genomes/Macaca_fascicularis_5.0_refseq_release_101/GCF_000364345.1_Macaca_fascicularis_5.0_genomic.fna.gz'
         gtf  = 's3://dicerna-etl/genomes/Macaca_fascicularis_5.0_refseq_release_101/GCF_000364345.1_Macaca_fascicularis_5.0_genomic.fixed.gtf.gz'
