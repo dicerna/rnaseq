@@ -28,6 +28,7 @@ To run the pipeline, go to tower.nf.
 }
 ```
 Those customized genomes were hosted in aws s3 for dicerna use. We can upgrade as we want. The GRCm38_v102, mf6_ens_v104, ... can be used in the genome field.
+Currently, there is no working human Refseq reference. The stringtie fails because of the GTF format issues.
 
  ```
       'human_ensembl_v104_2021_March' {
