@@ -1,14 +1,18 @@
-## Introduction
+![Dicerna](https://github.com/dicerna/rnaseq/blob/dicerna/assets/dicerna.logo.svg)
+
+
+
+# Introduction
 
 **nf-core/rnaseq** pipeline is used to analyse RNA sequencing data obtained from organisms with a reference genome and annotation.
 
 The pipeline is built using [Nextflow](https://www.nextflow.io), a workflow tool to run tasks across multiple compute infrastructures in a very portable manner. It uses Docker/Singularity containers making installation trivial and results highly reproducible. The [Nextflow DSL2](https://www.nextflow.io/docs/latest/dsl2.html) implementation of this pipeline uses one container per process which makes it much easier to maintain and update software dependencies. Where possible, these processes have been submitted to and installed from [nf-core/modules](https://github.com/nf-core/modules) in order to make them available to all nf-core pipelines, and to everyone within the Nextflow community!
 
-## The nextflow tower public hosted server is used to run this pipeline.
+# The nextflow tower public hosted server is used to run this pipeline.
 
 To run the pipeline, go to tower.nf.
 
-## Files prepared to run the pipeline.
+# Files prepared to run the pipeline.
 
 1. Transfer all the fastq.gz files to aws s3 use aws s3 cp command line.
 2. generate sample sheet as describe in the [nf-core rnaseq usage document](https://nf-co.re/rnaseq/3.3/usage). In the samplesheet, you provde the sample name, the path to fastq file(s), and the strandness information. transfer this file to aws s3 bucket.
@@ -88,7 +92,7 @@ Reference genome options
   aligner        : "star_salmon"  or "hisat2"
 ```
   
-## Pipeline summary
+# Pipeline summary
 
 The SRA download functionality has been removed from the pipeline (`>=3.2`) and ported to an independent workflow called [nf-core/fetchngs](https://nf-co.re/fetchngs). You can provide `--nf_core_pipeline rnaseq` when running nf-core/fetchngs to download and auto-create a samplesheet containing publicly available samples that can be accepted directly as input by this pipeline.
 
@@ -118,7 +122,7 @@ The SRA download functionality has been removed from the pipeline (`>=3.2`) and 
 > * **NB:** Quantification isn't performed if using `--aligner hisat2` due to the lack of an appropriate option to calculate accurate expression estimates from HISAT2 derived genomic alignments. However, you can use this route if you have a preference for the alignment, QC and other types of downstream analysis compatible with the output of HISAT2.
 > * **NB:** The `--aligner star_rsem` option will require STAR indices built from version 2.7.6a or later. However, in order to support legacy usage of genomes hosted on AWS iGenomes the `--aligner star_salmon` option requires indices built with STAR 2.6.1d or earlier. Please refer to this [issue](https://github.com/nf-core/rnaseq/issues/498) for further details.
 
-## Quick Start
+# Quick Start
 
 1. Install [`Nextflow`](https://www.nextflow.io/docs/latest/getstarted.html#installation) (`>=21.04.0`)
 
@@ -150,11 +154,11 @@ The SRA download functionality has been removed from the pipeline (`>=3.2`) and 
         ./fastq_dir_to_samplesheet.py <FASTQ_DIR> samplesheet.csv --strandedness reverse
         ```
 
-## Documentation
+# Documentation
 
 The nf-core/rnaseq pipeline comes with documentation about the pipeline [usage](https://nf-co.re/rnaseq/usage), [parameters](https://nf-co.re/rnaseq/parameters) and [output](https://nf-co.re/rnaseq/output).
 
-## Credits
+# Credits
 
 These scripts were originally written for use at the [National Genomics Infrastructure](https://ngisweden.scilifelab.se), part of [SciLifeLab](http://www.scilifelab.se/) in Stockholm, Sweden, by Phil Ewels ([@ewels](https://github.com/ewels)) and Rickard Hammarén ([@Hammarn](https://github.com/Hammarn)).
 
