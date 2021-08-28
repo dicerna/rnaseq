@@ -10,7 +10,7 @@ The pipeline is built using [Nextflow](https://www.nextflow.io), a workflow tool
 
 # The nextflow tower public hosted server is used to run this pipeline.
 
-To run the pipeline, go to tower.nf.
+To run the pipeline, go to [tower.nf](https://tower.nf).
 
 # Files prepared to run the pipeline.
 
