@@ -1,14 +1,18 @@
-## Introduction
+![Dicerna](https://github.com/dicerna/rnaseq/blob/dicerna/assets/dicerna.logo.svg)
 
-**nf-core/rnaseq** pipeline is used to analyse RNA sequencing data obtained from organisms with a reference genome and annotation.
+
+
+# Introduction
+
+We are using **nf-core/rnaseq** pipeline to analyse RNA sequencing data obtained from organisms with a reference genome and annotation.
 
 The pipeline is built using [Nextflow](https://www.nextflow.io), a workflow tool to run tasks across multiple compute infrastructures in a very portable manner. It uses Docker/Singularity containers making installation trivial and results highly reproducible. The [Nextflow DSL2](https://www.nextflow.io/docs/latest/dsl2.html) implementation of this pipeline uses one container per process which makes it much easier to maintain and update software dependencies. Where possible, these processes have been submitted to and installed from [nf-core/modules](https://github.com/nf-core/modules) in order to make them available to all nf-core pipelines, and to everyone within the Nextflow community!
 
-## The nextflow tower public hosted server is used to run this pipeline.
+# The nextflow tower public hosted server is used to run this pipeline.
 
-To run the pipeline, go to tower.nf.
+To run the pipeline, go to [tower.nf](https://tower.nf).
 
-## Files prepared to run the pipeline.
+# Files prepared to run the pipeline.
 
 1. Transfer all the fastq.gz files to aws s3 use aws s3 cp command line.
 2. generate sample sheet as describe in the [nf-core rnaseq usage document](https://nf-co.re/rnaseq/3.3/usage). In the samplesheet, you provde the sample name, the path to fastq file(s), and the strandness information. transfer this file to aws s3 bucket.
@@ -19,6 +23,20 @@ To run the pipeline, go to tower.nf.
 - outdir: the results directory.  **don't forget the last slash /**
 - genome.
 
+**Genomes names you can use**
+
+- **humuan:** ensembl: 'human_ensembl_v104_2021_March', refseq: 'human_refseq_release_109_2021_May', or GRCh38', 'GRCh37' from iGenome
+- **Tested 40 human samples with star_rsem, some samples run very slow at the 2nd pass. This leads to huge increase of AWS computing cost.** I googled the reason. I found [this](https://github.com/alexdobin/STAR/issues/733). Shoudl monitor the running for the public data.
+
+- **mouse:** ensembl: 'GRCm38_v102'
+
+- **crab eating monkey mf6:** ensembl: 'mf6_ens_v104'
+
+- **crab eating monkey mf5: ensembl:** 'mf5_ens_v102', refseq: 'mf5_refseq_r101'
+
+- **The mouse GRCm39 ensembl v104: GRCm39_v104 was also added. It was tested in GA01, but not being tested in AWS batch environment. Use with your own risk.**
+
+
 ```
 {
     "input":"s3://dicerna-etl/test/monkey/sample_sheet_full.csv",
@@ -28,11 +46,21 @@ To run the pipeline, go to tower.nf.
 }
 ```
 Those customized genomes were hosted in aws s3 for dicerna use. We can upgrade as we want. The GRCm38_v102, mf6_ens_v104, ... can be used in the genome field.
+Currently, there is no working human Refseq reference. The stringtie fails because of the GTF format issues.
 
-```
-     'GRCm38_v102' {
+ ```
+        'human_refseq_release_109_2021_May' {
+        fasta = 's3://dicerna-sysbio/genomes/refseq_GRCh38_major_release_seqs_for_alignment_pipelines/GCA_000001405.15_GRCh38_full_analysis_set.fna.gz'
+        gff  = 's3://dicerna-sysbio/genomes/refseq_GRCh38_major_release_seqs_for_alignment_pipelines/GCA_000001405.15_GRCh38_full_analysis_set.refseq_annotation.gff.gz'
+        hisat2_index = 's3://dicerna-sysbio/genomes/refseq_GRCh38_major_release_seqs_for_alignment_pipelines/GCA_000001405.15_GRCh38_full_analysis_set.fna.hisat2_index.tar.gz'
+      }
+      'GRCm38_v102' {
         fasta = 's3://dicerna-sysbio/genomes/GRCm38/Mus_musculus.GRCm38.dna.primary_assembly.fa.gz'
         gtf  = 's3://dicerna-sysbio/genomes/GRCm38/Mus_musculus.GRCm38.102.gtf'
+      }
+      'GRCm39_v104' {
+        fasta = 's3://dicerna-sysbio/genomes/GRCm39_v104/Mus_musculus.GRCm39.dna.primary_assembly.fa.gz'
+        gtf  = 's3://dicerna-sysbio/genomes/GRCm39_v104/Mus_musculus.GRCm39.104.gtf.gz'
       }
       'mf6_ens_v104' {
         fasta = 's3://dicerna-etl/genomes/Macaca_fascicularis_6.0/Macaca_fascicularis.Macaca_fascicularis_6.0.dna.toplevel.fa.gz'
@@ -40,7 +68,13 @@ Those customized genomes were hosted in aws s3 for dicerna use. We can upgrade a
       }
       'mf5_ens_v102' {
         fasta = 's3://dicerna-etl/genomes/Macaca_fascicularis_5.0_ensembl_release_102/Macaca_fascicularis.Macaca_fascicularis_5.0.dna.toplevel.fa.gz'
-        gtf = 's3://dicerna-etl/genomes/Macaca_fascicularis_5.0_ensembl_release_102/data/genomics/Jun/references/Macaca_fascicularis.Macaca_fascicularis_5.0.102.gtf.gz'
+        gtf = 's3://dicerna-etl/genomes/Macaca_fascicularis_5.0_ensembl_release_102/Macaca_fascicularis.Macaca_fascicularis_5.0.102.gtf.gz'
+      }
+      'mf5_ens_v102_ga01' {
+        fasta = 's3://dicerna-etl/genomes/Macaca_fascicularis_5.0_ensembl_release_102/Macaca_fascicularis.Macaca_fascicularis_5.0.dna.toplevel.fa.gz'
+        hisat2_index = 's3://dicerna-etl/genomes/Macaca_fascicularis_5.0_ensembl_release_102/feiran_hisat2_index/'
+        splicesites = 's3://dicerna-etl/genomes/mf5_ensembl_ga01/Macaca_fascicularis.ensembl.5.0.96_splicesites.txt'
+        gtf = 's3://dicerna-etl/genomes/Macaca_fascicularis_5.0_ensembl_release_102/Macaca_fascicularis.Macaca_fascicularis_5.0.102.gtf.gz'
       }
       'mf5_refseq_r101' {
         fasta = 's3://dicerna-etl/genomes/Macaca_fascicularis_5.0_refseq_release_101/GCF_000364345.1_Macaca_fascicularis_5.0_genomic.fna.gz'
@@ -48,8 +82,17 @@ Those customized genomes were hosted in aws s3 for dicerna use. We can upgrade a
       }
 ```
  
-
-## Pipeline summary
+Again, this is the check list for the important things to check:
+```
+Input/output options
+  input          : s3://dicerna-etl/test/monkey/sample_sheet_full.csv
+  outdir         : s3://dicerna-etl/test/monkey_dicerna/results_star/
+Reference genome options
+  genome         : mf5_ens_v102
+  aligner        : "star_salmon"  or "hisat2"
+```
+  
+# Pipeline summary
 
 The SRA download functionality has been removed from the pipeline (`>=3.2`) and ported to an independent workflow called [nf-core/fetchngs](https://nf-co.re/fetchngs). You can provide `--nf_core_pipeline rnaseq` when running nf-core/fetchngs to download and auto-create a samplesheet containing publicly available samples that can be accepted directly as input by this pipeline.
 
@@ -79,7 +122,7 @@ The SRA download functionality has been removed from the pipeline (`>=3.2`) and 
 > * **NB:** Quantification isn't performed if using `--aligner hisat2` due to the lack of an appropriate option to calculate accurate expression estimates from HISAT2 derived genomic alignments. However, you can use this route if you have a preference for the alignment, QC and other types of downstream analysis compatible with the output of HISAT2.
 > * **NB:** The `--aligner star_rsem` option will require STAR indices built from version 2.7.6a or later. However, in order to support legacy usage of genomes hosted on AWS iGenomes the `--aligner star_salmon` option requires indices built with STAR 2.6.1d or earlier. Please refer to this [issue](https://github.com/nf-core/rnaseq/issues/498) for further details.
 
-## Quick Start
+# Quick Start
 
 1. Install [`Nextflow`](https://www.nextflow.io/docs/latest/getstarted.html#installation) (`>=21.04.0`)
 
@@ -111,11 +154,11 @@ The SRA download functionality has been removed from the pipeline (`>=3.2`) and 
         ./fastq_dir_to_samplesheet.py <FASTQ_DIR> samplesheet.csv --strandedness reverse
         ```
 
-## Documentation
+# Documentation
 
 The nf-core/rnaseq pipeline comes with documentation about the pipeline [usage](https://nf-co.re/rnaseq/usage), [parameters](https://nf-co.re/rnaseq/parameters) and [output](https://nf-co.re/rnaseq/output).
 
-## Credits
+# Credits
 
 These scripts were originally written for use at the [National Genomics Infrastructure](https://ngisweden.scilifelab.se), part of [SciLifeLab](http://www.scilifelab.se/) in Stockholm, Sweden, by Phil Ewels ([@ewels](https://github.com/ewels)) and Rickard Hammarén ([@Hammarn](https://github.com/Hammarn)).
 
