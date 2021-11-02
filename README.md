@@ -49,7 +49,11 @@ Those customized genomes were hosted in aws s3 for dicerna use. We can upgrade a
 Currently, there is no working human Refseq reference. The stringtie fails because of the GTF format issues.
 
  ```
-        'human_refseq_release_109_2021_May' {
+       'mm39_ucsc' {
+        fasta = 's3://dicerna-sysbio/genomes/mm39_ucsc/mm39.fa.gz'
+        gtf  = 's3://dicerna-sysbio/genomes/mm39_ucsc/mm39.ncbiRefSeq.gtf.gz'
+      }
+      'human_refseq_release_109_2021_May' {
         fasta = 's3://dicerna-sysbio/genomes/refseq_GRCh38_major_release_seqs_for_alignment_pipelines/GCA_000001405.15_GRCh38_full_analysis_set.fna.gz'
         gff  = 's3://dicerna-sysbio/genomes/refseq_GRCh38_major_release_seqs_for_alignment_pipelines/GCA_000001405.15_GRCh38_full_analysis_set.refseq_annotation.gff.gz'
         hisat2_index = 's3://dicerna-sysbio/genomes/refseq_GRCh38_major_release_seqs_for_alignment_pipelines/GCA_000001405.15_GRCh38_full_analysis_set.fna.hisat2_index.tar.gz'
