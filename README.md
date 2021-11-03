@@ -51,7 +51,7 @@ Currently, there is no working human Refseq reference. The stringtie fails becau
  ```
       'hg38_ensGene' {
        fasta = 's3://dicerna-sysbio/genomes/hg38_ncbiRefSeq/hg38.fa.gz'
-       gtf  = ' s3://dicerna-sysbio/genomes/hs38_ncbiRefSeq/hg38.ensGene.gtf.gz'
+       gtf  = ' s3://dicerna-sysbio/genomes/hg38_ncbiRefSeq/hg38.ensGene.gtf.gz'
       }
       'hg38_refseq' {
        fasta = 's3://dicerna-sysbio/genomes/hg38_ncbiRefSeq/hg38.fa.gz'
