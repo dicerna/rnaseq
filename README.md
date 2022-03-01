@@ -49,6 +49,10 @@ Those customized genomes were hosted in aws s3 for dicerna use. We can upgrade a
 Currently, there is no working human Refseq reference. The stringtie fails because of the GTF format issues.
 
 ```
+      'rn7_ucsc_refseq' {
+        fasta = 'ftp://hgdownload.soe.ucsc.edu/goldenPath/rn7/bigZips/rn7.fa.gz'
+        gtf  = 'ftp://hgdownload.soe.ucsc.edu/goldenPath/rn7/bigZips/genes/ncbiRefSeq.gtf.gz'
+      }
       'mf5_ucsc_refseq' {
         fasta = 'ftp://hgdownload.cse.ucsc.edu/goldenPath/macFas5/bigZips/macFas5.fa.gz'
         gtf  = 'ftp://hgdownload.cse.ucsc.edu/goldenPath/macFas5/bigZips/genes/macFas5.ncbiRefSeq.gtf.gz'
