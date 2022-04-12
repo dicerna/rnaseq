@@ -32,7 +32,7 @@ To run the pipeline, go to [tower.nf](https://tower.nf).
 
 - **crab eating monkey mf6:** ensembl: 'mf6_ens_v104'
 
-- **crab eating monkey mf5: ensembl:** 'mf5_ens_v102', refseq: 'mf5_refseq_r101'
+- **crab eating monkey mf5: ensembl:** 'mf5_ucsc_refseq', 'mf5_ucsc_ensGene', 'mf5_ens_v102', refseq: 'mf5_refseq_r101', 'Macaca_fascicularis_MFA1912RKSv2_ERCC92_refseq_v102'
 
 - **The mouse GRCm39 ensembl v104: GRCm39_v104 was also added. It was tested in GA01, but not being tested in AWS batch environment. Use with your own risk.**
 
@@ -49,6 +49,12 @@ Those customized genomes were hosted in aws s3 for dicerna use. We can upgrade a
 Currently, there is no working human Refseq reference. The stringtie fails because of the GTF format issues.
 
 ```
+      // added this by Zhe, requested by Chris
+      'Macaca_fascicularis_MFA1912RKSv2_ERCC92_refseq_v102' {
+        fasta = 's3://dicerna-genomes/Macaca_fascicularis_MFA1912RKSv2_ERCC92_refseq_v102/GCF_012559485.2_MFA1912RKSv2_genomic_ERCC92.fna.gz'
+        gtf  = 's3://dicerna-genomes/Macaca_fascicularis_MFA1912RKSv2_ERCC92_refseq_v102/GCF_012559485.2_MFA1912RKSv2_genomic_ERCC92_fixed.gtf.gz'
+      }
+      
       'rn7_ucsc_refseq' {
         fasta = 'ftp://hgdownload.soe.ucsc.edu/goldenPath/rn7/bigZips/rn7.fa.gz'
         gtf  = 'ftp://hgdownload.soe.ucsc.edu/goldenPath/rn7/bigZips/genes/ncbiRefSeq.gtf.gz'
