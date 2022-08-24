@@ -37,6 +37,12 @@ The SRA download functionality has been removed from the pipeline (`>=3.2`) and 
 
 ```
 selected genome assembly and annotations:
+      // UCSC hg38 analysis set, ncbi refseq version 110
+      'ucsc_hg38_analysis_refseq_v110' {
+        fasta = 's3://dicerna-genomes/ucsc_hg38_analysis_refseq_v110/hg38.analysisSet.fa.gz'
+        gtf  = 's3://dicerna-genomes/ucsc_hg38_analysis_refseq_v110/hg38.ncbiRefSeq.gtf.gz'
+ 
+      }
       // added this by Zhe, requested by Chris, https://www.ncbi.nlm.nih.gov/assembly/GCF_012559485.2/
       'Macaca_fascicularis_MFA1912RKSv2_ERCC92_refseq_v102' {
         fasta = 's3://dicerna-genomes/Macaca_fascicularis_MFA1912RKSv2_ERCC92_refseq_v102/GCF_012559485.2_MFA1912RKSv2_genomic_ERCC92.fna.gz'
