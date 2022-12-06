@@ -65,6 +65,8 @@ selected genome assembly and annotations:
        fasta = 's3://dicerna-genomes/hg38_ncbiRefSeq/hg38.fa.gz'
        gtf  = 's3://dicerna-genomes/hg38_ncbiRefSeq/hg38.ncbiRefSeq.gtf.gz'
       }
+      
+      // download from https://hgdownload.soe.ucsc.edu/goldenPath/hg38/bigZips/
       'mm39_refseq' {
        fasta = 's3://dicerna-genomes/mm39_ucsc/mm39.fa.gz'
        gtf  = 's3://dicerna-genomes/mm39_ucsc/mm39.ncbiRefSeq.gtf.gz'
