@@ -41,6 +41,92 @@
 15. Pseudo-alignment and quantification ([`Salmon`](https://combine-lab.github.io/salmon/); _optional_)
 16. Present QC for raw read, alignment, gene biotype, sample similarity, and strand-specificity checks ([`MultiQC`](http://multiqc.info/), [`R`](https://www.r-project.org/))
 
+Some pre-configured genomes and annotations.
+You can also update your own to aws and enter the aws path in the power UI.
+
+```
+selected genome assembly and annotations:
+      // UCSC hg38 analysis set, ncbi refseq version 110
+      'ucsc_hg38_analysis_refseq_v110' {
+        fasta = 's3://dicerna-genomes/ucsc_hg38_analysis_refseq_v110/hg38.analysisSet.fa.gz'
+        gtf  = 's3://dicerna-genomes/ucsc_hg38_analysis_refseq_v110/hg38.ncbiRefSeq.gtf.gz'
+ 
+      }
+      // added this by Zhe, requested by Chris, https://www.ncbi.nlm.nih.gov/assembly/GCF_012559485.2/
+      'Macaca_fascicularis_MFA1912RKSv2_ERCC92_refseq_v102' {
+        fasta = 's3://dicerna-genomes/Macaca_fascicularis_MFA1912RKSv2_ERCC92_refseq_v102/GCF_012559485.2_MFA1912RKSv2_genomic_ERCC92.fna.gz'
+        gtf  = 's3://dicerna-genomes/Macaca_fascicularis_MFA1912RKSv2_ERCC92_refseq_v102/GCF_012559485.2_MFA1912RKSv2_genomic_ERCC92_fixed.gtf.gz'
+      }
+      
+      // rn7 from ucsc. to be consistent, may download the current version to our s3 bucket.
+      'rn7_ucsc_refseq' {
+        fasta = 'ftp://hgdownload.soe.ucsc.edu/goldenPath/rn7/bigZips/rn7.fa.gz'
+        gtf  = 'ftp://hgdownload.soe.ucsc.edu/goldenPath/rn7/bigZips/genes/ncbiRefSeq.gtf.gz'
+      }
+      'mf5_ucsc_refseq' {
+        fasta = 'ftp://hgdownload.cse.ucsc.edu/goldenPath/macFas5/bigZips/macFas5.fa.gz'
+        gtf  = 'ftp://hgdownload.cse.ucsc.edu/goldenPath/macFas5/bigZips/genes/macFas5.ncbiRefSeq.gtf.gz'
+      }
+      'mf5_ucsc_ensGene' {
+        fasta = 'ftp://hgdownload.cse.ucsc.edu/goldenPath/macFas5/bigZips/macFas5.fa.gz'
+        gtf  = 'ftp://hgdownload.cse.ucsc.edu/goldenPath/macFas5/bigZips/genes/macFas5.ensGene.gtf.gz'
+      }
+      'hg38_ensGene' {
+       fasta = 's3://dicerna-genomes/hg38_ncbiRefSeq/hg38.fa.gz'
+       gtf  = 's3://dicerna-genomes/hg38_ncbiRefSeq/hg38.ensGene.gtf.gz'
+      }
+      'hg38_refseq' {
+       fasta = 's3://dicerna-genomes/hg38_ncbiRefSeq/hg38.fa.gz'
+       gtf  = 's3://dicerna-genomes/hg38_ncbiRefSeq/hg38.ncbiRefSeq.gtf.gz'
+      }
+      
+      // download from https://hgdownload.soe.ucsc.edu/goldenPath/hg38/bigZips/
+      'mm39_refseq' {
+       fasta = 's3://dicerna-genomes/mm39_ucsc/mm39.fa.gz'
+       gtf  = 's3://dicerna-genomes/mm39_ucsc/mm39.ncbiRefSeq.gtf.gz'
+      }
+      
+      'human_ensembl_v104_2021_March' {
+        fasta = 's3://dicerna-genomes/human_ensembl_v014_2021_March/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz'
+        gtf  = 's3://dicerna-genomes/human_ensembl_v014_2021_March/Homo_sapiens.GRCh38.104.gtf.gz'
+      }
+
+      // removed gene line
+      //  zcat GCF_000001405.39_GRCh38.p13_genomic.gtf.gz | awk '$3 != "gene" ' | gzip > GCF_000001405.39_GRCh38.p13_genomic.fixed.gtf.gz
+      'human_refseq_release_109_2021_May' {
+        fasta = 's3://dicerna-genomes/refseq_GRCh38_major_release_seqs_for_alignment_pipelines/GCA_000001405.15_GRCh38_full_analysis_set.fna.gz'
+        gff  = 's3://dicerna-genomes/refseq_GRCh38_major_release_seqs_for_alignment_pipelines/GCA_000001405.15_GRCh38_full_analysis_set.refseq_annotation.gff.gz'
+        hisat2_index = 's3://dicerna-genomes/refseq_GRCh38_major_release_seqs_for_alignment_pipelines/GCA_000001405.15_GRCh38_full_analysis_set.fna.hisat2_index.tar.gz'
+      }
+      'GRCm38_v102' {
+        fasta = 's3://dicerna-genomes/GRCm38/Mus_musculus.GRCm38.dna.primary_assembly.fa.gz'
+        gtf  = 's3://dicerna-genomes/GRCm38/Mus_musculus.GRCm38.102.gtf'
+      }
+      'GRCm39_v104' {
+        fasta = 's3://dicerna-genomes/GRCm39_v104/Mus_musculus.GRCm39.dna.primary_assembly.fa.gz'
+        gtf  = 's3://dicerna-genomes/GRCm39_v104/Mus_musculus.GRCm39.104.gtf.gz'
+      }
+      'mf6_ens_v104' {
+        fasta = 's3://dicerna-genomes/Macaca_fascicularis_6.0/Macaca_fascicularis.Macaca_fascicularis_6.0.dna.toplevel.fa.gz'
+        gtf = 's3://dicerna-genomes/Macaca_fascicularis_6.0/Macaca_fascicularis.Macaca_fascicularis_6.0.104.gtf.gz'
+      }
+      'mf5_ens_v102' {
+        fasta = 's3://dicerna-genomes/Macaca_fascicularis_5.0_ensembl_release_102/Macaca_fascicularis.Macaca_fascicularis_5.0.dna.toplevel.fa.gz'
+        gtf = 's3://dicerna-genomes/Macaca_fascicularis_5.0_ensembl_release_102/Macaca_fascicularis.Macaca_fascicularis_5.0.102.gtf.gz'
+      }
+      'mf5_ens_v102_ga01' {
+        fasta = 's3://dicerna-genomes/Macaca_fascicularis_5.0_ensembl_release_102/Macaca_fascicularis.Macaca_fascicularis_5.0.dna.toplevel.fa.gz'
+        hisat2_index = 's3://dicerna-genomes/Macaca_fascicularis_5.0_ensembl_release_102/feiran_hisat2_index/'
+        splicesites = 's3://dicerna-genomes/mf5_ensembl_ga01/Macaca_fascicularis.ensembl.5.0.96_splicesites.txt'
+        gtf = 's3://dicerna-genomes/Macaca_fascicularis_5.0_ensembl_release_102/Macaca_fascicularis.Macaca_fascicularis_5.0.102.gtf.gz'
+      }
+      'mf5_refseq_r101' {
+        fasta = 's3://dicerna-genomes/Macaca_fascicularis_5.0_refseq_release_101/GCF_000364345.1_Macaca_fascicularis_5.0_genomic.fna.gz'
+        gtf  = 's3://dicerna-genomes/Macaca_fascicularis_5.0_refseq_release_101/GCF_000364345.1_Macaca_fascicularis_5.0_genomic.fixed.gtf.gz'
+      }
+```
+
+
 > **Note**
 > The SRA download functionality has been removed from the pipeline (`>=3.2`) and ported to an independent workflow called [nf-core/fetchngs](https://nf-co.re/fetchngs). You can provide `--nf_core_pipeline rnaseq` when running nf-core/fetchngs to download and auto-create a samplesheet containing publicly available samples that can be accepted directly as input by this pipeline.
 
